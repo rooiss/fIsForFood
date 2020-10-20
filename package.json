@@ -1,0 +1,26 @@
+{
+  "name": "fIsForFood",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rooiss/fIsForFood.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rooiss/fIsForFood/issues"
+  },
+  "homepage": "https://github.com/rooiss/fIsForFood#readme",
+  "dependencies": {
+    "apollo-server": "^2.18.2",
+    "express": "^4.17.1",
+    "graphql": "^15.3.0",
+    "typescript": "^4.0.3"
+  }
+}
