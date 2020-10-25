@@ -1,0 +1,21 @@
+version: '3'
+services:
+  fisforfood_postgres:
+    image: postgres
+    hostname: fisforfood_postgres
+    volumes:
+      - $PWD/.postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: picklerick
+      POSTGRES_USER: localdev
+      POSTGRES_DB: fisforfood
+    ports:
+      - '5432:5432'
+
+  adminer:
+    image: adminer
+    hostname: fisforfood_adminer
+    ports:
+      - '8080:8080'
+    depends_on:
+      - fisforfood_postgres

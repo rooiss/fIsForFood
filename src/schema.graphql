@@ -1,0 +1,116 @@
+type User {
+  id: ID!
+  name: String!
+  recipes: [Recipe!]!
+  activity: [Activity!]!
+}
+
+type Activity {
+  content: String!
+}
+
+type Recipe {
+  id: ID!
+  name: String!
+  image: String!
+  video: String
+  ingredients: [RecipeIngredient!]!
+  difficulty: Difficulty!
+  servings: Int!
+  """
+  in minutes
+  """
+  duration: Int!
+  steps: [RecipeStep!]!
+  comments: [RecipeComment!]!
+  categories: [String!]!
+  chef: User!
+}
+
+type RecipeComment {
+  id: ID!
+  user: User!
+  content: String!
+}
+
+type RecipeIngredient {
+  quantity: String!
+  name: String!
+}
+
+type RecipeStep {
+  # does the recipe step need the recipe Id as well?
+  id: ID!
+  content: String!
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+type Category {
+  id: ID!
+  label: String!
+}
+
+type Ingredient {
+  id: ID!
+  label: String!
+}
+
+type DeleteRecipeResponse {
+  success: Boolean!
+  errorCode: String!
+}
+
+input RecipeStepInput {
+  id: ID!
+  content: String!
+}
+
+input RecipeIngredientInput {
+  quantity: String!
+  name: String!
+}
+
+input CommentCreate {
+  recipeId: ID!
+  content: String!
+}
+
+input RecipeUpdate {
+  id: ID!
+  name: String
+  image: String
+  video: String
+  ingredients: [RecipeIngredientInput!]
+  difficulty: Difficulty
+  servings: Int
+  """
+  in minutes
+  """
+  duration: Int
+  steps: [RecipeStepInput!]
+  categories: [String!]
+}
+
+type Query {
+  recipes: [Recipe]
+  recipe(recipeId: String!): Recipe
+  comments: [RecipeComment!]!
+  categories(searchTerm: String!): [Category!]!
+  ingredients(searchTerm: String!): [Ingredient!]!
+}
+
+type Mutation {
+  createRecipe: Recipe!
+  createRecipeStep: RecipeStep!
+  updateRecipe(input: RecipeUpdate!): Recipe!
+  uploadImage(filename: String!, id: ID!): String!
+  uploadVideo(filename: String!, id: ID!): String!
+  deleteRecipe(recipeId: ID!): DeleteRecipeResponse!
+  createUser(id: ID!, name: String!, email: String!): User!
+  addComment(input: CommentCreate!): RecipeComment!
+}
