@@ -5,6 +5,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 export async function setupDB() {
   const config = getAppConfig()
   // synchronize database
+  console.log('config.dbConfig', config.dbConfig)
   const dbConnection = await createConnection(
     config.dbConfig as PostgresConnectionOptions,
   )
